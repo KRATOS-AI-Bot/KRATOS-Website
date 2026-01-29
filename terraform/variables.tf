@@ -2,28 +2,23 @@
 variable "aws_region" {
   type        = string
   default     = "ap-south-1"
+  description = "AWS Region"
+}
+
+variable "s3_bucket_name" {
+  type        = string
+  default     = "kratos-identity-protocol"
+  description = "S3 Bucket Name"
 }
 
 variable "aws_access_key" {
   type        = string
   sensitive   = true
+  description = "AWS Access Key"
 }
 
 variable "aws_secret_key" {
   type        = string
   sensitive   = true
-}
-
-variable "bucket_name" {
-  type        = string
-}
-
-variable "website_index" {
-  type        = string
-  default     = "index.html"
-}
-
-variable "website_error" {
-  type        = string
-  default     = "error.html"
+  description = "AWS Secret Key"
 }

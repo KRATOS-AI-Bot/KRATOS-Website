@@ -4,22 +4,8 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "website" {
-  bucket = "kratos-website-bucket"
+  bucket = "kratos-identity-protocol"
   acl    = "public-read"
-  versioning {
-    enabled = true
-  }
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
-    }
-  }
-}
-
-resource "aws_s3_bucket_policy" "website" {
-  bucket = aws_s3_bucket.website.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -28,24 +14,18 @@ resource "aws_s3_bucket_policy" "website" {
         Effect    = "Allow"
         Principal = "*"
         Action    = "s3:GetObject"
-        Resource = "${aws_s3_bucket.website.arn}/*"
+        Resource = "arn:aws:s3:::kratos-identity-protocol/*"
       },
     ]
   })
-}
 
-resource "aws_s3_bucket_website_configuration" "website" {
-  bucket = aws_s3_bucket.website.id
-  index_document {
-    suffix = "index.html"
-  }
-  error_document {
-    key = "error.html"
+  website {
+    index_document = "index.html"
   }
 }
 
 output "website_endpoint" {
-  value = "http://${aws_s3_bucket.website.website_endpoint}"
+  value = aws_s3_bucket.website.website_endpoint
 }
 
 output "s3_bucket_name" {

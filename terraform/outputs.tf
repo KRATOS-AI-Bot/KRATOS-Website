@@ -1,8 +1,8 @@
 
 output "website_endpoint" {
-  value = "https://${aws_s3_bucket.static_website_bucket.bucket_regional_domain_name}"
+  value = aws_s3_bucket_website_configuration.this.website_endpoint
 }
 
 output "s3_bucket_name" {
-  value = aws_s3_bucket.static_website_bucket.id
+  value = aws_s3_bucket.this.id
 }
