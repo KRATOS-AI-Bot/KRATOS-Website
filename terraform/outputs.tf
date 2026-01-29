@@ -1,7 +1,8 @@
+
 output "website_endpoint" {
-  value = aws_s3_bucket.this.website_endpoint
+  value = aws_s3_bucket.kratos_home_bucket.website_endpoint
 }
 
 output "s3_bucket_name" {
-  value = aws_s3_bucket.this.id
+  value = aws_s3_bucket.kratos_home_bucket.id
 }

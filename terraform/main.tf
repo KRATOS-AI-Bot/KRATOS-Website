@@ -3,8 +3,9 @@ provider "aws" {
   region = "ap-south-1"
 }
 
-resource "aws_s3_bucket" "this" {
-  bucket = local.bucket_name
+resource "aws_s3_bucket" "kratos_home" {
+  bucket = "kratos-home-12345"
+  acl    = "private"
 
   versioning {
     enabled = true
@@ -23,8 +24,8 @@ resource "aws_s3_bucket" "this" {
   }
 }
 
-resource "aws_s3_bucket_public_access_block" "this" {
-  bucket = aws_s3_bucket.this.id
+resource "aws_s3_bucket_public_access_block" "kratos_home" {
+  bucket = aws_s3_bucket.kratos_home.id
 
   block_public_acls   = false
   block_public_policy = false
@@ -32,18 +33,8 @@ resource "aws_s3_bucket_public_access_block" "this" {
   restrict_public_buckets = false
 }
 
-resource "aws_s3_bucket_ownership_controls" "this" {
-  bucket = aws_s3_bucket.this.id
-
-  rule {
-    object_ownership = "BucketOwnerPreferred"
-  }
-}
-
-resource "aws_s3_bucket_policy" "this" {
-  bucket = aws_s3_bucket.this.id
-
-  depends_on = [ aws_s3_bucket_public_access_block.this ]
+resource "aws_s3_bucket_policy" "kratos_home" {
+  bucket = aws_s3_bucket.kratos_home.id
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -53,8 +44,10 @@ resource "aws_s3_bucket_policy" "this" {
         Effect    = "Allow"
         Principal = "*"
         Action    = "s3:GetObject"
-        Resource = "${aws_s3_bucket.this.arn}/*"
+        Resource = "${aws_s3_bucket.kratos_home.arn}/*"
       },
     ]
   })
+
+  depends_on = [aws_s3_bucket_public_access_block.kratos_home]
 }
