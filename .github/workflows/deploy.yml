@@ -1,5 +1,5 @@
-yml
-name: Deploy to S3
+
+name: Deploy to AWS S3
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -28,4 +28,9 @@ jobs:
 
       - name: Sync files to S3
         run: |
-          aws s3 sync ./website s3://$(terraform output -raw s3_bucket_name) --delete
+          cd ..
+          aws s3 sync ./ s3://$(terraform output -state=terraform/terraform.tfstate s3_bucket_name) --delete
+
+      - name: Output website endpoint
+        run: |
+          echo "Website endpoint: http://$(terraform output -state=terraform/terraform.tfstate s3_bucket_name).s3-website.ap-south-1.amazonaws.com"
