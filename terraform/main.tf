@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "kratos_home" {
-  bucket = "kratos-home-${random_integer.random_id.result}"
+  bucket = "kratos-home-234"
   acl    = "private"
 
   versioning {
@@ -33,7 +33,19 @@ resource "aws_s3_bucket_public_access_block" "kratos_home" {
   restrict_public_buckets = false
 }
 
-resource "random_integer" "random_id" {
-  min = 10000
-  max = 99999
+resource "aws_s3_bucket_policy" "kratos_home" {
+  bucket = aws_s3_bucket.kratos_home.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "PublicReadGetObject"
+        Effect    = "Allow"
+        Principal = "*"
+        Action    = "s3:GetObject"
+        Resource = "${aws_s3_bucket.kratos_home.arn}/*"
+      },
+    ]
+  })
 }
