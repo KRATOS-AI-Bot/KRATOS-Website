@@ -1,33 +1,59 @@
 # Static Website on AWS S3 with Terraform and GitHub Actions
 
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Prerequisites](#prerequisites)
-3. [Infrastructure](#infrastructure)
-4. [Deployment](#deployment)
-5. [Security](#security)
-6. [Usage](#usage)
+This project showcases the creation of a static website hosted on AWS S3, utilizing Terraform for infrastructure management and GitHub Actions for automated deployment. The website is built with a cyberpunk theme and adheres to security best practices.
 
-## Introduction
-This project creates a static website hosted on AWS S3 using Terraform for infrastructure management and GitHub Actions for automated deployment.
+## Project Overview
 
-## Prerequisites
-- AWS account with necessary permissions
-- GitHub repository
-- Terraform installed on local machine (for testing purposes)
+The project consists of the following components:
 
-## Infrastructure
-The infrastructure is defined in Terraform configuration files located in the `terraform` directory. This includes the creation of an S3 bucket for hosting the website.
+* Terraform configuration for creating an S3 bucket and enabling public access
+* GitHub Actions workflow for deploying the website to S3
+* Cyberpunk-themed static website
+
+## Terraform Configuration
+
+The Terraform configuration is located in the `terraform` folder and consists of the following files:
+
+* `main.tf`: Defines the S3 bucket and enables public access
+* `outputs.tf`: Outputs the website endpoint and S3 bucket name
+* `versions.tf`: Specifies the Terraform version and AWS provider
+
+## GitHub Actions Workflow
+
+The GitHub Actions workflow is defined in the `.github/workflows/deploy.yml` file and consists of the following steps:
+
+* Loads AWS credentials from repository secrets
+* Installs Terraform on the runner
+* Creates the infrastructure using Terraform
+* Syncs the website files to S3 using `aws s3 sync`
+
+## Cyberpunk-Themed Static Website
+
+The static website is built with HTML, CSS, and JavaScript, and features a cyberpunk theme. The website is located in the `website` folder and consists of the following files:
+
+* `index.html`: The main entry point of the website
+* `styles.css`: Defines the website's styles and layout
+* `script.js`: Adds interactivity to the website
+
+## Security Considerations
+
+The project adheres to security best practices, including:
+
+* Using secure protocols for communication (HTTPS)
+* Enabling public access to the S3 bucket via a bucket policy
+* Using least privilege access for the AWS credentials
 
 ## Deployment
-The deployment pipeline is managed by GitHub Actions. The workflow file is located in the `.github/workflows` directory. This workflow installs Terraform, initializes the Terraform working directory, applies the Terraform configuration, and syncs the website files to the S3 bucket.
 
-## Security
-The S3 bucket has a bucket policy that enables public access to the website. The Terraform configuration includes security defaults for the S3 bucket.
+To deploy the website, simply push changes to the repository, and the GitHub Actions workflow will automatically create the infrastructure and sync the website files to S3.
 
-## Usage
-1. Clone the repository to your local machine.
-2. Update the `terraform/variables.tf` file with your AWS credentials and region.
-3. Run `terraform init` and `terraform apply` in the `terraform` directory to create the infrastructure.
-4. Push changes to the GitHub repository to trigger the deployment pipeline.
-5. Access the website using the endpoint output by the Terraform configuration.
+## Outputs
+
+The Terraform configuration outputs the following values:
+
+* `website_endpoint`: The URL of the deployed website
+* `s3_bucket_name`: The name of the S3 bucket hosting the website
+
+## Conclusion
+
+This project demonstrates the creation of a static website on AWS S3, utilizing Terraform and GitHub Actions for automated deployment. The website features a cyberpunk theme and adheres to security best practices, making it a robust and scalable solution for hosting static content.

@@ -1,5 +1,5 @@
 
-name: Deploy to S3
+name: Deploy to AWS S3
 
 on:
   push:
@@ -11,30 +11,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      - name: Install Terraform
-        uses: hashicorp/terraform-github-actions@v1.6.0
-        with:
-          terraform_version: '1.4.3'
-
-      - name: Initialize Terraform
-        run: |
-          cd terraform
-          terraform init
-
-      - name: Apply Terraform
-        run: |
-          cd terraform
-          terraform apply -auto-approve
-
-      - name: Configure AWS Credentials
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: 'ap-south-1'
+          aws-region: ap-south-1
+
+      - name: Install Terraform
+        uses: hashicorp/terraform-github-actions@v1.5.0
+        with:
+          terraform_version: '1.2.5'
+
+      - name: Initialize and apply Terraform configuration
+        run: |
+          cd terraform
+          terraform init
+          terraform apply -auto-approve
 
       - name: Sync files to S3
         run: |
-          aws s3 sync ./ s3://$(terraform output -state=terraform/terraform.tfstate s3_bucket_name) --delete
+          aws s3 sync ./ s3://$(terraform output -raw s3_bucket_name) --delete
