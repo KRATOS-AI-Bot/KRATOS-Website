@@ -11,14 +11,14 @@ variable "bucket_name" {
   description = "S3 Bucket Name"
 }
 
-variable "index_document" {
+variable "aws_access_key" {
   type        = string
-  default     = "index.html"
-  description = "Index Document"
+  sensitive   = true
+  description = "AWS Access Key"
 }
 
-variable "error_document" {
+variable "aws_secret_key" {
   type        = string
-  default     = "error.html"
-  description = "Error Document"
+  sensitive   = true
+  description = "AWS Secret Key"
 }

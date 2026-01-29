@@ -5,11 +5,7 @@ provider "aws" {
 
 resource "aws_s3_bucket" "kratos_home" {
   bucket = "kratos-home-${random_integer.random_id.result}"
-  acl    = "public-read"
-
-  website {
-    index_document = "index.html"
-  }
+  acl    = "private"
 
   versioning {
     enabled = true
@@ -22,23 +18,19 @@ resource "aws_s3_bucket" "kratos_home" {
       }
     }
   }
+
+  website {
+    index_document = "index.html"
+  }
 }
 
-resource "aws_s3_bucket_policy" "kratos_home_policy" {
+resource "aws_s3_bucket_public_access_block" "kratos_home" {
   bucket = aws_s3_bucket.kratos_home.id
 
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Sid       = "PublicReadGetObject"
-        Effect    = "Allow"
-        Principal = "*"
-        Action    = "s3:GetObject"
-        Resource = "${aws_s3_bucket.kratos_home.arn}/*"
-      },
-    ]
-  })
+  block_public_acls   = false
+  block_public_policy = false
+  ignore_public_acls  = false
+  restrict_public_buckets = false
 }
 
 resource "random_integer" "random_id" {
