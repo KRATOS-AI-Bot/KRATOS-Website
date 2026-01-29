@@ -8,17 +8,12 @@ variable "bucket_name" {
   type        = string
 }
 
-variable "environment" {
+variable "website_index" {
   type        = string
-  default     = "production"
+  default     = "index.html"
 }
 
-variable "aws_access_key" {
+variable "website_error" {
   type        = string
-  sensitive   = true
-}
-
-variable "aws_secret_key" {
-  type        = string
-  sensitive   = true
+  default     = "error.html"
 }

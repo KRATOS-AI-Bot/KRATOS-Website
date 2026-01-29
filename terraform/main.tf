@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "website" {
-  bucket = "cyberpunk-website-${random_string.random.id}"
+  bucket = "my-static-website-bucket"
   acl    = "public-read"
 
   versioning {
@@ -17,11 +17,6 @@ resource "aws_s3_bucket" "website" {
         sse_algorithm = "AES256"
       }
     }
-  }
-
-  website {
-    index_document = "index.html"
-    error_document = "error.html"
   }
 }
 
@@ -42,14 +37,20 @@ resource "aws_s3_bucket_policy" "website" {
   })
 }
 
-resource "random_string" "random" {
-  length  = 8
-  special = false
-  upper    = false
+resource "aws_s3_bucket_website_configuration" "website" {
+  bucket = aws_s3_bucket.website.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
+  }
 }
 
 output "website_endpoint" {
-  value = aws_s3_bucket.website.website_endpoint
+  value = "http://${aws_s3_bucket.website.bucket}.s3-website.ap-south-1.amazonaws.com"
 }
 
 output "s3_bucket_name" {

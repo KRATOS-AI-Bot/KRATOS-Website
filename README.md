@@ -9,28 +9,25 @@
 6. [Usage](#usage)
 
 ## Introduction
-This project creates a static website on AWS S3 using Terraform for infrastructure management and GitHub Actions for deployment. The website is hosted directly on S3 without using CloudFront.
+This project creates a static website hosted on AWS S3 using Terraform for infrastructure management and GitHub Actions for automated deployment.
 
 ## Prerequisites
 - AWS account with necessary permissions
 - GitHub repository
-- Terraform installed on local machine
-- AWS CLI configured on local machine
+- Terraform installed on local machine (for testing purposes)
 
 ## Infrastructure
-The infrastructure is defined in the terraform folder and includes an S3 bucket with public access enabled via a bucket policy.
+The infrastructure is defined in Terraform configuration files located in the `terraform` directory. This includes the creation of an S3 bucket for hosting the website.
 
 ## Deployment
-The deployment pipeline is defined in the .github/workflows folder and uses GitHub Actions to create the infrastructure and sync files to S3.
+The deployment pipeline is managed by GitHub Actions. The workflow file is located in the `.github/workflows` directory. This workflow installs Terraform, initializes the Terraform working directory, applies the Terraform configuration, and syncs the website files to the S3 bucket.
 
 ## Security
-The S3 bucket has public access enabled via a bucket policy, and the AWS resources are created in the ap-south-1 region.
+The S3 bucket has a bucket policy that enables public access to the website. The Terraform configuration includes security defaults for the S3 bucket.
 
 ## Usage
-To use this project, follow these steps:
-- Clone the repository
-- Configure your AWS credentials
-- Run the Terraform code to create the infrastructure
-- Push changes to the repository to trigger the deployment pipeline
-
-This project provides a basic example of how to create a static website on AWS S3 using Terraform and GitHub Actions. It can be customized and extended to fit your specific needs.
+1. Clone the repository to your local machine.
+2. Update the `terraform/variables.tf` file with your AWS credentials and region.
+3. Run `terraform init` and `terraform apply` in the `terraform` directory to create the infrastructure.
+4. Push changes to the GitHub repository to trigger the deployment pipeline.
+5. Access the website using the endpoint output by the Terraform configuration.
