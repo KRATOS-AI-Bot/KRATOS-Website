@@ -9,22 +9,13 @@ variable "bucket_name" {
   default     = "kratos-home-${random_integer.random_id.result}"
 }
 
-variable "index_document" {
-  type        = string
-  default     = "index.html"
+variable "random_id" {
+  type = object({
+    result = number
+  })
 }
 
-variable "error_document" {
-  type        = string
-  default     = "error.html"
-}
-
-variable "aws_access_key" {
-  type        = string
-  sensitive   = true
-}
-
-variable "aws_secret_key" {
-  type        = string
-  sensitive   = true
+resource "random_integer" "random_id" {
+  min = 10000
+  max = 99999
 }
