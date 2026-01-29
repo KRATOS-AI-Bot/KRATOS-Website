@@ -11,8 +11,14 @@ variable "bucket_name" {
   description = "S3 Bucket Name"
 }
 
-variable "index_file" {
+variable "index_document" {
   type        = string
   default     = "index.html"
-  description = "Index File Name"
+  description = "Index Document"
+}
+
+variable "error_document" {
+  type        = string
+  default     = "error.html"
+  description = "Error Document"
 }
