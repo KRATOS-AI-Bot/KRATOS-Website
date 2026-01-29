@@ -4,13 +4,11 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "website" {
-  bucket = "kratos-website-${random_string.random.id}"
+  bucket = "kratos-website-bucket"
   acl    = "public-read"
-
   versioning {
     enabled = true
   }
-
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
@@ -18,16 +16,10 @@ resource "aws_s3_bucket" "website" {
       }
     }
   }
-
-  website {
-    index_document = "index.html"
-    error_document = "error.html"
-  }
 }
 
 resource "aws_s3_bucket_policy" "website" {
   bucket = aws_s3_bucket.website.id
-
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -42,14 +34,18 @@ resource "aws_s3_bucket_policy" "website" {
   })
 }
 
-resource "random_string" "random" {
-  length  = 8
-  special = false
-  upper   = false
+resource "aws_s3_bucket_website_configuration" "website" {
+  bucket = aws_s3_bucket.website.id
+  index_document {
+    suffix = "index.html"
+  }
+  error_document {
+    key = "error.html"
+  }
 }
 
 output "website_endpoint" {
-  value = aws_s3_bucket.website.website_endpoint
+  value = "http://${aws_s3_bucket.website.website_endpoint}"
 }
 
 output "s3_bucket_name" {
