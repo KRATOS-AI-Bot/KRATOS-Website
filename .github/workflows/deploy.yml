@@ -1,5 +1,5 @@
 
-name: Deploy to AWS S3
+name: Deploy to S3
 
 on:
   push:
@@ -19,24 +19,24 @@ jobs:
           terraform_version: 'latest'
 
       - name: Initialize Terraform
-        run: |
-          cd terraform
-          terraform init
+        run: terraform -chdir=terraform init
 
       - name: Apply Terraform
-        run: |
-          cd terraform
-          terraform apply -auto-approve
+        run: terraform -chdir=terraform apply -auto-approve
 
       - name: Get Terraform Output
         run: |
-          cd terraform
-          export WEBSITE_ENDPOINT=$(terraform output -json website_endpoint | jq -r '.value')
-          export S3_BUCKET_NAME=$(terraform output -json s3_bucket_name | jq -r '.value')
-          echo "WEBSITE_ENDPOINT=$WEBSITE_ENDPOINT" >> $GITHUB_ENV
-          echo "S3_BUCKET_NAME=$S3_BUCKET_NAME" >> $GITHUB_ENV
+          echo "website_endpoint=$(terraform -chdir=terraform output -json website_endpoint | jq -r '.value')"
+          echo "s3_bucket_name=$(terraform -chdir=terraform output -json s3_bucket_name | jq -r '.value')"
+          echo "::set-output name=website_endpoint::$(terraform -chdir=terraform output -json website_endpoint | jq -r '.value')"
+          echo "::set-output name=s3_bucket_name::$(terraform -chdir=terraform output -json s3_bucket_name | jq -r '.value')"
 
       - name: Sync index.html to S3
         run: |
           aws s3 sync . s3://${S3_BUCKET_NAME} --delete
           aws s3 cp index.html s3://${S3_BUCKET_NAME}/index.html
+        env:
+          S3_BUCKET_NAME: ${{ steps.deploy.outputs.s3_bucket_name }}
+          AWS_REGION: ap-south-1
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
