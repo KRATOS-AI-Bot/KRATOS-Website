@@ -1,11 +1,24 @@
-variable "bucket_name" {
-  description = "The name of the S3 bucket for the static website."
+terraform
+variable "aws_region" {
   type        = string
-  default     = "kratos-cyberpunk-website-s3-bucket"
+  default     = "ap-south-1"
 }
 
-variable "aws_region" {
-  description = "The AWS region where the S3 bucket will be created."
+variable "bucket_name" {
   type        = string
-  default     = "us-east-1"
+}
+
+variable "environment" {
+  type        = string
+  default     = "production"
+}
+
+variable "aws_access_key" {
+  type        = string
+  sensitive   = true
+}
+
+variable "aws_secret_key" {
+  type        = string
+  sensitive   = true
 }
