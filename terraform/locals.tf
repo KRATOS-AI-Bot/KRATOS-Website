@@ -1,6 +1,6 @@
 
 locals {
-  random_int = random_integer.random.id
+  random_int = random_integer.random.result
   bucket_name = "kratos-home-${local.random_int}"
 }
 
