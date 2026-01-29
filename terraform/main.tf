@@ -35,11 +35,3 @@ resource "aws_s3_bucket" "website" {
     }
   }
 }
-
-output "website_endpoint" {
-  value = aws_s3_bucket.website.website_endpoint
-}
-
-output "s3_bucket_name" {
-  value = aws_s3_bucket.website.id
-}
