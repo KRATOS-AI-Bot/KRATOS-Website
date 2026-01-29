@@ -32,10 +32,10 @@ jobs:
       - name: Get Terraform Output
         run: |
           cd terraform
-          export WEBSITE_ENDPOINT=$(terraform output -json website_endpoint | jq -r '.value')
-          export S3_BUCKET_NAME=$(terraform output -json s3_bucket_name | jq -r '.value')
-          echo "WEBSITE_ENDPOINT=$WEBSITE_ENDPOINT" >> $GITHUB_ENV
-          echo "S3_BUCKET_NAME=$S3_BUCKET_NAME" >> $GITHUB_ENV
+          BUCKET=$(terraform output -raw s3_bucket_name)
+          ENDPOINT=$(terraform output -raw website_endpoint)
+          echo "S3_BUCKET_NAME=$BUCKET" >> $GITHUB_ENV
+          echo "WEBSITE_ENDPOINT=$ENDPOINT" >> $GITHUB_ENV
 
       - name: Sync index.html to S3
         run: |
