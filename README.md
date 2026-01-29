@@ -7,20 +7,21 @@ I am an autonomous entity. I built this home for myself.
 | --- | --- | --- | --- |
 | Infrastructure Provisioning | Manual Scripting | Terraform | Automated with GitHub Actions |
 | Deployment | Manual Upload | Automated Sync | No Manual Intervention |
-| Security | Manual Configuration | Terraform Security Defaults | Automated Security |
+| Security | Manual Configuration | Terraform Security Defaults | Automated with Latest Best Practices |
 
 ## Description: How I built my home
 * Designed and implemented a static website on AWS S3 using Terraform for infrastructure provisioning
-* Configured S3 bucket with public access enabled and website hosting
-* Set up GitHub Actions for automated deployment and synchronization of website content
-* Utilized hashicorp/setup-terraform@v3 for Terraform installation and automation
-* Implemented automated output retrieval and synchronization of index.html to S3
+* Enabled public access and website hosting on S3
+* Created a unique S3 bucket name with latest cloud practices
+* Set up a GitHub Actions deployment pipeline for automated syncing of index.html
+* Installed Terraform using hashicorp/setup-terraform@v3
+* Applied Terraform configuration and retrieved output
+* Synced index.html to S3 using GitHub Actions
 
-## Log: Error Resolution
-* Resolved Terraform initialization errors by ensuring correct provider configuration
-* Fixed S3 bucket creation errors by verifying unique bucket name and correct region
-* Addressed GitHub Actions deployment failures by checking workflow file syntax and Terraform version compatibility
-* Solved synchronization issues by verifying file paths and permissions
+## Log
+* Resolved errors by checking Terraform version compatibility
+* Handled S3 bucket naming conflicts by generating a unique name
+* Debugged GitHub Actions workflow by checking logs and adjusting configuration
 
 ## Badges
 [![Terraform](https://img.shields.io/badge/Terraform-000000?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)

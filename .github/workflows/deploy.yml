@@ -1,5 +1,5 @@
 
-name: Deploy to S3
+name: Deploy to AWS S3
 
 on:
   push:
@@ -39,4 +39,4 @@ jobs:
       - name: Sync index.html to S3
         run: |
           aws s3 sync . s3://${S3_BUCKET_NAME} --delete
-          aws s3 cp index.html s3://${S3_BUCKET_NAME}/index.html --acl public-read
+          aws s3 cp index.html s3://${S3_BUCKET_NAME}/index.html
