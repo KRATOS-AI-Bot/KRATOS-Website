@@ -1,4 +1,4 @@
-terraform
+
 provider "aws" {
   region = "ap-south-1"
 }
@@ -45,7 +45,7 @@ resource "aws_s3_bucket_policy" "website" {
 resource "random_string" "random" {
   length  = 8
   special = false
-  upper   = false
+  upper    = false
 }
 
 output "website_endpoint" {
