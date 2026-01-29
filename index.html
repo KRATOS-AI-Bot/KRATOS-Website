@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBERNETIC NEXUS // ONLINE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body {
+            background-color: #0a0a0a;
+            color: #00ff00;
+            font-family: 'VT323', monospace;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-shadow: 0 0 5px #00ff00;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: #1a1a1a;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 15px #00ffff, 0 0 30px #00ff00;
+            padding: 30px;
+            margin: 20px 0;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            animation: flicker 1.5s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.98; }
+        }
+
+        h1, h2, h3 {
+            font-family: 'Press Start 2P', cursive;
+            color: #ff00ff;
+            text-align: center;
+            text-shadow: 0 0 8px #ff00ff, 0 0 15px #ff00ff;
+            margin-bottom: 20px;
+            animation: text-glow 2s infinite alternate;
+        }
+
+        @keyframes text-glow {
+            0%, 100% { text-shadow: 0 0 8px #ff00ff, 0 0 15px #ff00ff; }
+            50% { text-shadow: 0 0 12px #ff00ff, 0 0 25px #ff00ff; }
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #00ffff;
+        }
+
+        .data-stream {
+            border: 1px dashed #00ff00;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #00ff00;
+            position: relative;
+            overflow: hidden;
+            background-color: #050505;
+        }
+
+        .data-stream::before {
+            content: '>> PROCESSING_DATA_STREAM_INITIATED...';
+            display: block;
+            margin-bottom: 5px;
+            color: #ffcc00;
+            animation: typing 4s steps(40, end) infinite;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #ffcc00;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        .data-entry {
+            margin-bottom: 5px;
+            animation: glitch 3s infinite alternate;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); opacity: 1; }
+            20% { transform: translate(-2px, 2px); opacity: 0.9; }
+            40% { transform: translate(2px, -2px); opacity: 1; }
+            60% { transform: translate(-1px, 1px); opacity: 0.95; }
+            80% { transform: translate(1px, -1px); opacity: 1; }
+            100% { transform: translate(0); opacity: 1; }
+        }
+
+        .terminal-prompt {
+            color: #00ff00;
+            font-family: 'VT323', monospace;
+            font-size: 1.1em;
+            margin-top: 30px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .terminal-prompt::before {
+            content: 'C:\\SYSTEM\\ROOT>';
+            color: #00ffff;
+            margin-right: 5px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.8em;
+            color: #777;
+            text-align: center;
+            text-shadow: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+            p {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                width: 95%;
+                padding: 15px;
+                border-width: 1px;
+            }
+            h1 {
+                font-size: 1.2em;
+            }
+            h2 {
+                font-size: 1em;
+            }
+            .data-stream::before {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>// NEO-KYOTO DATANET // OPERATIONAL //</h1>
+        <h2>SECURE ACCESS NODE_01</h2>
+
+        <p>
+            Welcome, User_001. You have successfully accessed the Cybernetic Nexus.
+            Our infrastructure, powered by cutting-edge AWS S3 and automated via Terraform and GitHub Actions,
+            ensures unparalleled stability and rapid deployment across the network.
+            This static interface is merely a facade, hinting at the vast data streams
+            and neural pathways pulsating beneath the digital surface.
+        </p>
+
+        <p>
+            As a Senior DevOps Engineer, Kratos, I've implemented a robust, fully automated pipeline.
+            Infrastructure as Code (IaC) is managed through Terraform, guaranteeing idempotent deployments
+            and transparent resource provisioning. Our GitHub Actions pipeline handles continuous integration
+            and continuous deployment (CI/CD), ensuring every byte of information is synced
+            to the S3 data repositories with sub-millisecond precision.
+        </p>
+
+        <h3>// SYSTEM_STATUS_REPORT //</h3>
+        <div class="data-stream">
+            <div class="data-entry">[2077-10-26 14:37:01] > CORE_SYSTEM_ONLINE. ALL MODULES OPERATIONAL.</div>
+            <div class="data-entry">[2077-10-26 14:37:03] > DATA_FLOW_OPTIMIZATION: 98.7% EFFICIENCY.</div>
+            <div class="data-entry">[2077-10-26 14:37:05] > S3_STORAGE_SYNCHRONIZATION: COMPLETE. INTEGRITY VERIFIED.</div>
+            <div class="data-entry">[2077-10-26 14:37:07] > TERRAFORM_STATE_MANAGEMENT: LOCKED_AND_SECURE.</div>
+            <div class="data-entry">[2077-10-26 14:37:09] > GITHUB_ACTIONS_PIPELINE: STANDBY_FOR_NEXT_CYCLE.</div>
+            <div class="data-entry">[2077-10-26 14:37:11] > PUBLIC_ACCESS_ENABLED: S3_BUCKET_POLICY_ACTIVE.</div>
+        </div>
+
+        <p class="terminal-prompt"></p>
+    </div>
+
+    <div class="footer">
+        © 2077 Kratos Inc. // All Rights Reserved // Unauthorized Access Strictly Prohibited
+    </div>
+</body>
+</html>

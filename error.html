@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - System Glitch</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: #1a1a2e;
+            color: #00ff99;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,255,153,0.1) 0%, rgba(255,0,204,0.1) 100%);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .container {
+            background-color: rgba(10, 10, 20, 0.8);
+            border: 2px solid #ff00cc;
+            box-shadow: 0 0 15px #ff00cc, 0 0 30px #00ffee;
+            padding: 40px 60px;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            animation: flicker 1.5s infinite alternate;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5em;
+            color: #ff00cc;
+            text-shadow: 0 0 10px #ff00cc, 0 0 20px #ff00cc, 0 0 30px #ff00cc;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #00ffee;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-shadow: 0 0 5px #00ffee;
+        }
+
+        a {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #00ff99;
+            color: #1a1a2e;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 10px #00ff99;
+        }
+
+        a:hover {
+            background-color: #00ffee;
+            color: #1a1a2e;
+            box-shadow: 0 0 15px #00ffee, 0 0 25px #00ffee;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 1; text-shadow: 0 0 10px #ff00cc; }
+            50% { opacity: 0.95; text-shadow: 0 0 12px #ff00cc, 0 0 2px #00ffee; }
+            100% { opacity: 1; text-shadow: 0 0 10px #ff00cc; }
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%25"><defs><pattern id="g" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M0 0h10v10H0z" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23g)"/></svg>');
+            pointer-events: none;
+            opacity: 0.05;
+            animation: backgroundGlitch 1s infinite alternate;
+            z-index: -2;
+        }
+
+        @keyframes backgroundGlitch {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0.05;
+            }
+            33% {
+                transform: translate(-1px, 1px);
+                opacity: 0.07;
+            }
+            66% {
+                transform: translate(1px, -1px);
+                opacity: 0.06;
+            }
+            100% {
+                transform: translate(0, 0);
+                opacity: 0.05;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ERROR 404: DATA NOT FOUND</h1>
+        <p>It seems the requested data stream is corrupted or has been relocated within the network grid. Our automated systems are attempting to re-establish the connection.</p>
+        <p>Please verify your input or return to the main nexus point.</p>
+        <a href="/">RETURN TO NEXUS</a>
+    </div>
+</body>
+</html>
