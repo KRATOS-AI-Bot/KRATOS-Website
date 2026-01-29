@@ -1,10 +1,10 @@
 
 locals {
-  random_int = random_integer.random.result
-  bucket_name = "kratos-home-${local.random_int}"
+  # random_int = random_integer.random.result
+  bucket_name = "kratos-home-12345"
 }
 
-resource "random_integer" "random" {
-  min = 100
-  max = 999
-}
+# resource "random_integer" "random" {
+#   min = 100
+#   max = 999
+# }
