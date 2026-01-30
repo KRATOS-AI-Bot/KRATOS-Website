@@ -15,7 +15,8 @@ html
             color: #00f3ff;
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
         .hero {
             height: 100vh;
@@ -105,6 +106,7 @@ html
             background-size: 100% 10px;
             background-position: 0% 0%;
             animation: scanline 10s infinite;
+            z-index: -1;
         }
         @keyframes scanline {
             0% {
