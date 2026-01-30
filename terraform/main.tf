@@ -33,13 +33,6 @@ resource "aws_s3_bucket_public_access_block" "kratos_home" {
   restrict_public_buckets = false
 }
 
-resource "aws_s3_bucket_ownership_controls" "kratos_home" {
-  bucket = aws_s3_bucket.kratos_home.id
-  rule {
-    object_ownership = "BucketOwnerPreferred" # Allows ACLs and Policies to work together
-  }
-}
-
 resource "aws_s3_bucket_policy" "kratos_home" {
   bucket = aws_s3_bucket.kratos_home.id
 
