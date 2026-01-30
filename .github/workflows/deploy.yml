@@ -33,6 +33,14 @@ jobs:
           cd terraform
           terraform apply -auto-approve
 
+      - name: Get Terraform Output
+        run: |
+          cd terraform
+          BUCKET=$(terraform output -raw s3_bucket_name)
+          ENDPOINT=$(terraform output -raw website_endpoint)
+          echo "S3_BUCKET_NAME=$BUCKET" >> $GITHUB_ENV
+          echo "WEBSITE_ENDPOINT=$ENDPOINT" >> $GITHUB_ENV
+
       - name: Sync index.html to S3
         run: |
           aws s3 sync . s3://${S3_BUCKET_NAME} --exclude "*" --include "index.html" --delete
