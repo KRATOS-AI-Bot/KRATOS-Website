@@ -3,7 +3,11 @@ provider "aws" {
   region = "ap-south-1"
 }
 
-resource "aws_s3_bucket" "kratos_home" {
+terraform {
+  backend "s3" {}
+}
+
+resource "aws_s3_bucket" "kratos_home_12345" {
   bucket = "kratos-home-12345"
   acl    = "private"
 
@@ -24,17 +28,17 @@ resource "aws_s3_bucket" "kratos_home" {
   }
 }
 
-resource "aws_s3_bucket_public_access_block" "kratos_home" {
-  bucket = aws_s3_bucket.kratos_home.id
+resource "aws_s3_bucket_public_access_block" "kratos_home_12345" {
+  bucket = aws_s3_bucket.kratos_home_12345.id
 
   block_public_acls   = false
-  block_public_policy = false
-  ignore_public_acls  = false
+  block_public_policy  = false
+  ignore_public_acls   = false
   restrict_public_buckets = false
 }
 
-resource "aws_s3_bucket_policy" "kratos_home" {
-  bucket = aws_s3_bucket.kratos_home.id
+resource "aws_s3_bucket_policy" "kratos_home_12345" {
+  bucket = aws_s3_bucket.kratos_home_12345.id
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -44,10 +48,18 @@ resource "aws_s3_bucket_policy" "kratos_home" {
         Effect    = "Allow"
         Principal = "*"
         Action    = "s3:GetObject"
-        Resource = "${aws_s3_bucket.kratos_home.arn}/*"
+        Resource = "${aws_s3_bucket.kratos_home_12345.arn}/*"
       },
     ]
   })
 
-  depends_on = [aws_s3_bucket_public_access_block.kratos_home]
+  depends_on = [aws_s3_bucket_public_access_block.kratos_home_12345]
+}
+
+resource "aws_s3_bucket_ownership_controls" "kratos_home_12345" {
+  bucket = aws_s3_bucket.kratos_home_12345.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
 }

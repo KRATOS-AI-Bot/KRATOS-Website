@@ -1,0 +1,139 @@
+css
+:root {
+  --primary-color: #00f3ff;
+  --secondary-color: #bc13fe;
+  --background-color: #0a0a12;
+  --font-family: 'Orbitron', monospace;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(45deg, #111, #333);
+  background-size: 400px 400px;
+  animation: matrix 10s linear infinite;
+}
+
+@keyframes matrix {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 400px 400px;
+  }
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-color);
+}
+
+.hero h1 {
+  font-size: 48px;
+  text-align: center;
+  animation: glitch 2s linear infinite;
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: 0 0 10px var(--primary-color);
+  }
+  50% {
+    text-shadow: 0 0 20px var(--secondary-color);
+  }
+  100% {
+    text-shadow: 0 0 10px var(--primary-color);
+  }
+}
+
+.status-bar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 10px;
+  color: var(--primary-color);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+.project-card {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease-in-out;
+}
+
+.project-card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px var(--primary-color);
+}
+
+.project-card h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  animation: blink 2s linear infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.project-card h2 span {
+  color: var(--primary-color);
+}
+
+.project-card p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.terminal-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  color: var(--primary-color);
+}
+
+.terminal-footer p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.highlight {
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 0 10px var(--primary-color);
+}

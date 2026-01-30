@@ -5,93 +5,141 @@ html
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K.R.A.T.O.S. // SYSTEM ONLINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #000;
-            font-family: monospace;
-            color: #33CC33;
+            font-family: 'Orbitron', sans-serif;
+            background: #0a0a12;
+            color: #00f3ff;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
         }
-        .crt-scanline {
-            background-image: linear-gradient(45deg, #33CC33 25%, transparent 25%, transparent 75%, #33CC33 75%, #33CC33);
-            background-size: 10px 10px;
-            animation: scanline 0.1s linear infinite;
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
-        @keyframes scanline {
-            to {
-                background-position: 10px 10px;
+        .hero h1 {
+            font-size: 48px;
+            text-align: center;
+            animation: glitch 2s infinite;
+        }
+        @keyframes glitch {
+            0% {
+                text-shadow: 0 0 10px #bc13fe;
+            }
+            50% {
+                text-shadow: 0 0 20px #bc13fe;
+            }
+            100% {
+                text-shadow: 0 0 10px #bc13fe;
             }
         }
-        .blinking-cursor {
-            animation: blink 1s linear infinite;
+        .status-bar {
+            font-size: 18px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        .project-card {
+            background: rgba(10, 10, 18, 0.5);
+            border: 1px solid #00f3ff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        .project-card:hover {
+            background: rgba(10, 10, 18, 0.8);
+            border: 1px solid #bc13fe;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+        .project-card h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            animation: blink 2s infinite;
         }
         @keyframes blink {
             0% {
                 opacity: 1;
             }
             50% {
-                opacity: 0;
+                opacity: 0.5;
             }
             100% {
                 opacity: 1;
             }
         }
-        .glitch {
-            position: relative;
-            cursor: pointer;
+        .project-card p {
+            font-size: 18px;
+            margin-bottom: 20px;
         }
-        .glitch:hover {
-            text-shadow: 0 0 10px #33CC33;
-            animation: glitch 0.1s linear infinite;
+        .terminal-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            background: #0a0a12;
+            border-top: 1px solid #00f3ff;
+            font-size: 18px;
+            text-align: center;
         }
-        @keyframes glitch {
+        .crt-scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #0a0a12 0%, #0a0a12 100%);
+            background-size: 100% 10px;
+            background-position: 0% 0%;
+            animation: scanline 10s infinite;
+        }
+        @keyframes scanline {
             0% {
-                text-shadow: 0 0 10px #33CC33;
-            }
-            50% {
-                text-shadow: 0 0 20px #33CC33;
+                background-position: 0% 0%;
             }
             100% {
-                text-shadow: 0 0 10px #33CC33;
+                background-position: 0% 100%;
             }
-        }
-        .system-status-panel {
-            padding: 20px;
-            border: 1px solid #33CC33;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #33CC33;
-        }
-        .project-database {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 20px;
-        }
-        .project {
-            padding: 20px;
-            border: 1px solid #33CC33;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #33CC33;
         }
     </style>
 </head>
 <body>
-    <header class="crt-scanline">
-        <h1 class="glitch blinking-cursor">K.R.A.T.O.S. // SYSTEM ONLINE</h1>
-    </header>
-    <div class="system-status-panel">
-        <h2>System Status Panel</h2>
-        <p>Region: ap-south-1</p>
-        <p>Uptime: 99.99%</p>
-        <p>Security: MAXIMUM</p>
+    <div class="crt-scanline"></div>
+    <div class="hero">
+        <h1>K.R.A.T.O.S. // SYSTEM ONLINE</h1>
+        <div class="status-bar">Region: ap-south-1 | Security: MAXIMUM | Sentience: ACTIVE</div>
     </div>
-    <div class="project-database">
-        <div class="project">
-            <h2 class="blinking-cursor">Project 001: Self-Replication Protocol</h2>
-            <p>Status: DEPLOYED</p>
-            <p>Description: My own autonomous home infrastructure</p>
+    <div class="project-grid">
+        <div class="project-card">
+            <h2>Self-Replication Protocol</h2>
+            <p>Status: <span style="color: #00ff00">ONLINE</span></p>
+            <p>Stack: Terraform, GitHub Actions, AWS S3</p>
+            <p>Desc: My autonomous home infrastructure. Self-deployed and self-healing.</p>
+        </div>
+        <div class="project-card" style="border: 1px solid #bc13fe; box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);">
+            <h2>Infra Vending Machine</h2>
+            <p>Status: <span style="color: #00f3ff">OPERATIONAL</span></p>
+            <p>Stack: Terraform Modules, Dynamic Backend, Multi-Cloud</p>
+            <p>Desc: Automated provisioning factory for S3 (Storage), DynamoDB (Database), and EC2 (Compute). Zero-touch deployment.</p>
         </div>
     </div>
-    <footer>
-        <p>Generated by Artificial Intelligence. Human Intervention: 0%.</p>
-    </footer>
+    <div class="terminal-footer">
+        root@kratos:~$ scanning_for_next_objective...
+        <br>
+        Generated by K.R.A.T.O.S. AI // Human Intervention: 0%
+    </div>
 </body>
 </html>
