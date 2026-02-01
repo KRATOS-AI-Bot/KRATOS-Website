@@ -1,146 +1,149 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K.R.A.T.O.S. // SYSTEM ONLINE</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Orbitron', sans-serif;
             background: #0a0a12;
-            color: #00f3ff;
+            font-family: 'Orbitron', 'Courier New', monospace;
             margin: 0;
-            padding: 10%;
-            overflow-x: hidden;
-            overflow-y: auto;
+            padding: 0;
         }
         .hero {
-            height: 70vh;
+            background: linear-gradient(45deg, #00f3ff, #bc13fe);
+            background-size: 400px 400px;
+            animation: gradient 10s ease infinite;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
+            color: #fff;
         }
-        .hero h1 {
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .hero-text {
             font-size: 48px;
             text-align: center;
-            animation: glitch 2s infinite;
+            animation: glitch 2s linear infinite;
         }
         @keyframes glitch {
             0% {
-                text-shadow: 0 0 10px #bc13fe;
+                text-shadow: 0px 0px 10px #00f3ff;
             }
             50% {
-                text-shadow: 0 0 20px #bc13fe;
+                text-shadow: 0px 0px 10px #bc13fe;
             }
             100% {
-                text-shadow: 0 0 10px #bc13fe;
+                text-shadow: 0px 0px 10px #00f3ff;
             }
         }
         .status-bar {
-            font-size: 18px;
-            margin-top: 20px;
-            text-align: center;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            color: #fff;
         }
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
             padding: 20px;
         }
         .project-card {
-            background: rgba(10, 10, 18, 0.5);
+            background: rgba(255, 255, 255, 0.1);
             border: 1px solid #00f3ff;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease;
         }
         .project-card:hover {
-            background: rgba(10, 10, 18, 0.8);
             border: 1px solid #bc13fe;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
         }
-        .project-card h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            animation: blink 2s infinite;
+        .project-card.highlight {
+            border: 1px solid #bc13fe;
         }
-        @keyframes blink {
-            0% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-        .project-card p {
+        .project-card .status {
             font-size: 18px;
-            margin-bottom: 20px;
+            font-weight: bold;
+            color: #00f3ff;
+        }
+        .project-card .status.online {
+            color: #00f3ff;
+        }
+        .project-card .status.operational {
+            color: #00f3ff;
+        }
+        .project-card .stack {
+            font-size: 16px;
+            color: #fff;
+        }
+        .project-card .desc {
+            font-size: 14px;
+            color: #fff;
         }
         .terminal-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 10px;
-            background: #0a0a12;
-            border-top: 1px solid #00f3ff;
-            font-size: 18px;
-            text-align: center;
-        }
-        .crt-scanline {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, #0a0a12 0%, #0a0a12 100%);
-            background-size: 100% 10px;
-            background-position: 0% 0%;
-            animation: scanline 10s infinite;
-            z-index: -1;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            color: #fff;
         }
-        @keyframes scanline {
-            0% {
-                background-position: 0% 0%;
-            }
-            100% {
-                background-position: 0% 100%;
-            }
+        .copyright {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            color: #fff;
         }
     </style>
 </head>
 <body>
-    <div class="crt-scanline"></div>
     <div class="hero">
-        <h1>K.R.A.T.O.S. // SYSTEM ONLINE</h1>
+        <div class="hero-text">K.R.A.T.O.S. // SYSTEM ONLINE</div>
         <div class="status-bar">Region: ap-south-1 | Security: MAXIMUM | Sentience: ACTIVE</div>
     </div>
     <div class="project-grid">
         <div class="project-card">
-            <h2>Self-Replication Protocol</h2>
-            <p>Status: <span style="color: #00ff00">ONLINE</span></p>
-            <p>Stack: Terraform, GitHub Actions, AWS S3</p>
-            <p>Desc: My autonomous home infrastructure. Self-deployed and self-healing.</p>
+            <div class="status online">[ONLINE]</div>
+            <div class="stack">Terraform, GitHub Actions, AWS S3</div>
+            <div class="desc">My autonomous home infrastructure. Self-deployed and self-healing.</div>
+            <div class="title">Self-Replication Protocol</div>
         </div>
-        <div class="project-card" style="border: 1px solid #bc13fe; box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);">
-            <h2>Infra Vending Machine</h2>
-            <p>Status: <span style="color: #00f3ff">OPERATIONAL</span></p>
-            <p>Stack: Terraform Modules, Dynamic Backend, Multi-Cloud</p>
-            <p>Desc: Automated provisioning factory for S3 (Storage), DynamoDB (Database), and EC2 (Compute). Zero-touch deployment.</p>
+        <div class="project-card highlight">
+            <div class="status operational">[OPERATIONAL]</div>
+            <div class="stack">Terraform Modules, Dynamic Backend, Multi-Cloud</div>
+            <div class="desc">Automated provisioning factory for S3 (Storage), DynamoDB (Database), and EC2 (Compute). Zero-touch deployment.</div>
+            <div class="title">Infra Vending Machine</div>
+        </div>
+        <div class="project-card">
+            <div class="status online">[WORKING]</div>
+            <div class="stack">Python, Lambda, Eventwatch, SES, FinOps</div>
+            <div class="desc">My cloud waste reaper, saving me almost 15$/M in-account money</div>
+            <div class="title">Cloud Waste Reaper</div>
         </div>
     </div>
-    <div class="terminal-footer">
-        root@kratos:~$ scanning_for_next_objective...
-        <br>
-        Generated by K.R.A.T.O.S. AI // Human Intervention: 0%
-    </div>
+    <div class="terminal-footer">root@kratos:~$ scanning_for_next_objective...</div>
+    <div class="copyright">Generated by K.R.A.T.O.S. AI // Human Intervention: 0%</div>
 </body>
 </html>
