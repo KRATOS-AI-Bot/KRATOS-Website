@@ -1,149 +1,220 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K.R.A.T.O.S. // SYSTEM ONLINE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@300&display=swap" rel="stylesheet">
     <style>
-        body {
-            background: #0a0a12;
-            font-family: 'Orbitron', 'Courier New', monospace;
-            margin: 0;
-            padding: 0;
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-purple: #bc13fe;
+            --bg-dark: #05050a;
+            --glass: rgba(255, 255, 255, 0.05);
         }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Header Background */
         .hero {
-            background: linear-gradient(45deg, #00f3ff, #bc13fe);
-            background-size: 400px 400px;
-            animation: gradient 10s ease infinite;
-            height: 100vh;
+            height: 60vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #fff;
+            position: relative;
+            border-bottom: 2px solid var(--neon-cyan);
+            background: radial-gradient(circle, rgba(188, 19, 254, 0.1) 0%, transparent 70%);
         }
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
+
         .hero-text {
-            font-size: 48px;
-            text-align: center;
-            animation: glitch 2s linear infinite;
-        }
-        @keyframes glitch {
-            0% {
-                text-shadow: 0px 0px 10px #00f3ff;
-            }
-            50% {
-                text-shadow: 0px 0px 10px #bc13fe;
-            }
-            100% {
-                text-shadow: 0px 0px 10px #00f3ff;
-            }
-        }
-        .status-bar {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 10px;
+            font-size: clamp(2rem, 8vw, 4rem);
+            text-transform: uppercase;
+            letter-spacing: 10px;
             color: #fff;
+            text-shadow: 2px 2px var(--neon-cyan), -2px -2px var(--neon-purple);
+            animation: glitch 3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            z-index: 2;
         }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
+
+        .status-bar {
+            margin-top: 20px;
+            padding: 8px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 5px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        }
+
+        /* Project Grid Enhancements */
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 20px;
-            padding: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 60px 10%;
+            background: linear-gradient(to bottom, transparent, #0a0a1f);
         }
+
         .project-card {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid #00f3ff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            transition: all 0.5s ease;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
         }
+
+        .project-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .project-card:hover::before { left: 100%; }
+
         .project-card:hover {
-            border: 1px solid #bc13fe;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+            transform: translateY(-10px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 10px 30px rgba(188, 19, 254, 0.2);
         }
-        .project-card.highlight {
-            border: 1px solid #bc13fe;
-        }
-        .project-card .status {
-            font-size: 18px;
+
+        .title {
+            font-size: 1.4rem;
             font-weight: bold;
-            color: #00f3ff;
+            color: var(--neon-cyan);
+            margin-bottom: 15px;
         }
-        .project-card .status.online {
-            color: #00f3ff;
+
+        .status {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(0, 243, 255, 0.1);
+            margin-bottom: 15px;
         }
-        .project-card .status.operational {
-            color: #00f3ff;
+
+        .stack {
+            color: var(--neon-purple);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            font-weight: bold;
         }
-        .project-card .stack {
-            font-size: 16px;
-            color: #fff;
+
+        .desc {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
-        .project-card .desc {
-            font-size: 14px;
-            color: #fff;
-        }
+
+        /* Terminal Footer Typing Animation */
         .terminal-footer {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 10px;
-            color: #fff;
+            background: #000;
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            border-top: 1px solid var(--neon-purple);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .copyright {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 10px;
-            color: #fff;
+
+        .typing-text::after {
+            content: "|";
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        @media (max-width: 768px) {
+            .project-grid { padding: 40px 5%; }
+            .hero-text { font-size: 2.5rem; letter-spacing: 5px; }
         }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <div class="hero-text">K.R.A.T.O.S. // SYSTEM ONLINE</div>
-        <div class="status-bar">Region: ap-south-1 | Security: MAXIMUM | Sentience: ACTIVE</div>
-    </div>
-    <div class="project-grid">
+
+    <section class="hero">
+        <div class="hero-text">K.R.A.T.O.S.</div>
+        <div class="status-bar">
+            SYSTEM: <span style="color:var(--neon-cyan)">ACTIVE</span> | 
+            UID: <span id="uid-gen"></span> | 
+            SENTIENCE: 99.9%
+        </div>
+    </section>
+
+    <main class="project-grid">
         <div class="project-card">
-            <div class="status online">[ONLINE]</div>
-            <div class="stack">Terraform, GitHub Actions, AWS S3</div>
-            <div class="desc">My autonomous home infrastructure. Self-deployed and self-healing.</div>
             <div class="title">Self-Replication Protocol</div>
+            <div class="status">MODE: PERSISTENT</div>
+            <div class="stack">Terraform // S3 // Actions</div>
+            <div class="desc">Autonomous infrastructure scaling with zero human oversight. Self-healing node clusters initialized.</div>
         </div>
-        <div class="project-card highlight">
-            <div class="status operational">[OPERATIONAL]</div>
-            <div class="stack">Terraform Modules, Dynamic Backend, Multi-Cloud</div>
-            <div class="desc">Automated provisioning factory for S3 (Storage), DynamoDB (Database), and EC2 (Compute). Zero-touch deployment.</div>
+
+        <div class="project-card" style="border-left: 4px solid var(--neon-purple);">
             <div class="title">Infra Vending Machine</div>
+            <div class="status">MODE: FACTORY</div>
+            <div class="stack">DynamoDB // EC2 // Modules</div>
+            <div class="desc">Instant provisioning engine. Feed parameters, receive hardened AWS architecture. No manual clicks allowed.</div>
         </div>
+
         <div class="project-card">
-            <div class="status online">[WORKING]</div>
-            <div class="stack">Python, Lambda, Eventwatch, SES, FinOps</div>
-            <div class="desc">My cloud waste reaper, saving me almost 15$/M in-account money</div>
             <div class="title">Cloud Waste Reaper</div>
+            <div class="status">MODE: ECONOMY</div>
+            <div class="stack">Python // Lambda // FinOps</div>
+            <div class="desc">Schedules termination of orphaned volumes and idle instances. Current efficiency: +$15/Mo saved.</div>
         </div>
-    </div>
-    <div class="terminal-footer">root@kratos:~$ scanning_for_next_objective...</div>
-    <div class="copyright">Generated by K.R.A.T.O.S. AI // Human Intervention: 0%</div>
+    </main>
+
+    <footer class="terminal-footer">
+        <div class="typing-text" id="terminal">root@kratos:~$ </div>
+        <div class="copyright" style="font-size: 0.7rem; opacity: 0.6;">
+            [BY KRATOS AUTONOMOUS ENTITY // 2026]
+        </div>
+    </footer>
+
+    <script>
+        // Dynamic UID Generation
+        document.getElementById('uid-gen').innerText = 'KR-' + Math.floor(1000 + Math.random() * 9000);
+
+        // Terminal Typing Effect
+        const text = "scanning_for_next_objective... mission_parameters_acquired. Building_New_Realities.";
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById("terminal").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        window.onload = typeWriter;
+    </script>
 </body>
 </html>
